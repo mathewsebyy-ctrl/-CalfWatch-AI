@@ -1,7 +1,7 @@
 from calf_detection import detect_calf
 from behaviour_detection import detect_behavior
 from risk_engine import calculate_risk
-
+import cv2
 
 def main():
 
@@ -9,11 +9,18 @@ def main():
     print("       CALFWATCH AI")
     print("================================")
 
-    # Temporary frame
-    frame = None
+        # Load a real frame from the test video
+    cap = cv2.VideoCapture("data/test_videos/calf_test.mp4.mp4")
+    ret, frame = cap.read()
+    cap.release()
 
-    # Step 1: Calf detection
-    calf_detected = detect_calf(frame)
+    if not ret:
+        print("Could not read frame from video.")
+        return
+
+       # Step 1: Calf detection
+    result = detect_calf(frame)
+    calf_detected = result["detected"]
 
     print("\nCalf detected:", calf_detected)
 
