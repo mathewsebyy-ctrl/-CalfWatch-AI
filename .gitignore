@@ -4,3 +4,5 @@ __pycache__/
 .streamlit/
 .vscode/
 yolov8n.pt
+data/status.json
+data/test_videos/
