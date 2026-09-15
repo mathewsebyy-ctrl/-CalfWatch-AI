@@ -27,15 +27,20 @@ def analyze_video(video_path):
     calf_detected = False
 
     while True:
+        # These lines must be indented inside the while loop
         ret, frame = cap.read()
-
         if not ret:
             break
 
         frame_number += 1
+
+        # Analyze every 3rd frame to improve speed
+        if frame_number % 2 != 0:
+            continue
+
+        # Calculate elapsed time ONLY for the frames being analyzed
         elapsed_time = frame_number / fps
 
-        # Calf detection
         calf_result = detect_calf(frame)
         calf_detected = calf_result["detected"]
 
